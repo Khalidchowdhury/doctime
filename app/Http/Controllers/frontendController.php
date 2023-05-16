@@ -8,9 +8,9 @@ class frontendController extends Controller
 {
 
     /**
-     * 
+     *
      * Doctime application main view Home Page
-     * 
+     *
      */
     public function showhomepage()
     {
@@ -19,9 +19,9 @@ class frontendController extends Controller
 
 
     /**
-     * 
+     *
      * Doctime application Login page view Home Page
-     * 
+     *
      */
     public function showLoginPage()
     {
@@ -29,9 +29,9 @@ class frontendController extends Controller
     }
 
     /**
-     * 
+     *
      * Doctime application Register page view Home Page
-     * 
+     *
      */
     public function patientRegisterPage()
     {
@@ -40,9 +40,9 @@ class frontendController extends Controller
 
 
     /**
-     * 
+     *
      * Doctime application Register page view Home Page
-     * 
+     *
      */
     public function patientDashboardPage()
     {
@@ -50,9 +50,9 @@ class frontendController extends Controller
     }
 
     /**
-     * 
+     *
      * Doctime application Register page view Home Page
-     * 
+     *
      */
     public function doctorRegisterPage()
     {
@@ -61,17 +61,14 @@ class frontendController extends Controller
 
 
     /**
-     * 
+     *
      * Doctime application Register page view Home Page
-     * 
+     *
      */
     public function doctorDashboardPage()
     {
         return view('frontend.doctor.dashboard');
     }
-
-
-
 
 
 
