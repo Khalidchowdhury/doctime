@@ -9,11 +9,11 @@ use App\Http\Controllers\frontendController;
 
 
 Route::get('/', [frontendController::class, 'showhomepage']) -> name('home.page');
-Route::get('/login', [frontendController::class, 'showLoginPage']) -> name('login.page');
+Route::get('/login', [frontendController::class, 'showLoginPage']) -> name('login.page') -> middleware('adminRedirect');
 
 
 // Patient route setup
-Route::get('/patient-register', [frontendController::class, 'patientRegisterPage']) -> name('patientRegister.page');
+Route::get('/patient-register', [frontendController::class, 'patientRegisterPage']) -> name('patientRegister.page') -> middleware('adminRedirect');
 Route::get('/patient-dashboard', [frontendController::class, 'patientDashboardPage']) -> name('patientDashboard.page') -> middleware('admin');
 Route::post('/patient-register', [PatientRegisterController::class, 'register']) -> name('patient.register');
 Route::post('/patient-login', [PatientRegisterController::class, 'login']) -> name('patient.login');
