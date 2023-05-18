@@ -6,6 +6,7 @@ use App\Models\patient;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use PhpParser\Node\Stmt\Return_;
 
 class PatientRegisterController extends Controller
@@ -55,7 +56,7 @@ class PatientRegisterController extends Controller
         // Auth Process
         if
         (
-            Auth::guard('patient') -> attempt([ 'email' => $request -> email, 'password' => $request -> password ]) ||  Auth::guard('patient') -> attempt([ 'mobile' => $request -> mobile, 'password' => $request -> password ]))
+            Auth::guard('patient') -> attempt([ 'email' => $request -> email, 'password' => $request -> password ]) ||  Auth::guard('patient') -> attempt([ 'mobile' => $request -> email, 'password' => $request -> password ]))
         {
             return redirect() -> route('patientDashboard.page');
         }else{
@@ -65,6 +66,19 @@ class PatientRegisterController extends Controller
     }
 
 
+
+
+
+        /**
+         * 
+         *  Patient logout system
+         * 
+         */
+        public function logout()
+        {
+            Auth::guard('patient') -> logout();
+            return redirect() -> route('login.page');
+        }
 
 
 
