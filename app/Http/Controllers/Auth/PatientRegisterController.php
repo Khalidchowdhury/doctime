@@ -5,14 +5,16 @@ namespace App\Http\Controllers\Auth;
 use App\Models\patient;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Stmt\Return_;
 
 class PatientRegisterController extends Controller
 {
-    
+
     /**
-    * 
-    * Patient register
-    * 
+    *
+    * Patient register system
+    *
     */
    public function register(Request $request)
    {
@@ -23,12 +25,12 @@ class PatientRegisterController extends Controller
         'password'      => 'required',
        ]);
 
-        //  data store 
+        //  data store
        patient::create([
         'name'       => $request -> name,
         'mobile'     => $request -> mobile,
         'email'      => $request -> email,
-        'password'   => $request -> password,
+        'password'   => password_hash($request -> password, PASSWORD_DEFAULT),
        ]);
 
        return redirect() -> route('patientRegister.page') -> with('success', 'Patient Account Created');
@@ -38,10 +40,35 @@ class PatientRegisterController extends Controller
 
 
 
-   
+    /**
+     *
+     * Patient login system
+     *
+     */
+    public function login(Request $request)
+    {
+        $this -> validate($request , [
+            'email'         => 'required',
+            'password'      => 'required',
+        ]);
 
-   
-   
+        // Auth Process
+        if
+        (
+            Auth::guard('patient') -> attempt([ 'email' => $request -> email, 'password' => $request -> password ]) ||  Auth::guard('patient') -> attempt([ 'mobile' => $request -> mobile, 'password' => $request -> password ]))
+        {
+            return redirect() -> route('patientDashboard.page');
+        }else{
+            return redirect() -> route('login.page') -> with('danger'. 'Auth Failed');
+        }
+ 
+    }
+
+
+
+
+
+
 
 
 

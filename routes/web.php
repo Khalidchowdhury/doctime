@@ -14,6 +14,7 @@ Route::get('/login', [frontendController::class, 'showLoginPage']) -> name('logi
 Route::get('/patient-register', [frontendController::class, 'patientRegisterPage']) -> name('patientRegister.page');
 Route::get('/patient-dashboard', [frontendController::class, 'patientDashboardPage']) -> name('patientDashboard.page');
 Route::post('/patient-register', [PatientRegisterController::class, 'register']) -> name('patient.register');
+Route::post('/patient-login', [PatientRegisterController::class, 'login']) -> name('patient.login');
 
 
 // Doctor route setup
