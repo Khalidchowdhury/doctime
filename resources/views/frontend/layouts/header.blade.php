@@ -92,7 +92,9 @@
 							</div>
 							<div class="header-contact-detail">
 								<p class="contact-header">Contact</p>
-								<p class="contact-info-header"> +1 315 369 5943</p>
+								<p class="contact-info-header">
+									+8801954881840
+								</p>
 							</div>
 						</li>
 
@@ -117,8 +119,12 @@
 											<img src="{{ url('assets/img/patients/patient.jpg') }}" alt="User Image" class="avatar-img rounded-circle">
 										</div>
 										<div class="user-text">
-											<h6>Richard Wilson</h6>
-											<p class="text-muted mb-0">Patient</p>
+											<h6>
+												{{ Auth::guard('patient') -> user() -> name }}
+											</h6>
+											<p class="text-muted mb-0">
+												{{ Auth::guard('patient') ->user() -> mobile }}
+											</p>
 										</div>
 									</div>
 									<a class="dropdown-item" href="{{ route('patientDashboard.page') }}">Dashboard</a>
