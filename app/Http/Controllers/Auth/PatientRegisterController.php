@@ -84,6 +84,30 @@ class PatientRegisterController extends Controller
 
 
 
+        /**
+         * 
+         *  patient profile setting page
+         * 
+         */
+        public function showSettingPage()
+        {
+            return view('frontend.Patients.setting');
+        }
+
+
+
+
+        /**
+         * 
+         *  patient profile setting page
+         * 
+         */
+        public function showPasswordPage()
+        {
+            return view('frontend.Patients.password');
+        }
+
+
 
 
 
