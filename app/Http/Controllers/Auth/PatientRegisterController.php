@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\patient;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Return_;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
-use PhpParser\Node\Stmt\Return_;
 
 class PatientRegisterController extends Controller
 {
@@ -60,7 +61,7 @@ class PatientRegisterController extends Controller
         {
             return redirect() -> route('patientDashboard.page');
         }else{
-            return redirect() -> route('login.page') -> with('danger'. 'Auth Failed');
+            return redirect() -> route('login.page') -> with('danger', 'Login failed. Please try again.');
         }
  
     }
@@ -99,7 +100,7 @@ class PatientRegisterController extends Controller
 
         /**
          * 
-         *  patient profile setting page
+         *  patient password change page
          * 
          */
         public function showPasswordPage()
@@ -107,6 +108,26 @@ class PatientRegisterController extends Controller
             return view('frontend.Patients.password');
         }
 
+        public function PasswordPage(Request $request)
+        {
+            // old password check
+            if( !password_verify( $request -> old_password , Auth::guard('patient') -> user() -> password ) ){
+                return back() -> with('danger', 'Old Password not match');
+            }
+
+            // password Confirmation
+            if( $request -> password != $request -> pass_conform ){
+                return back() -> with('warning', 'password can not Confirm ');
+            }
+
+            $data = patient::findOrFail(Auth::guard('patient') -> user() -> id);
+            $data -> update([
+                'password'  => Hash::make($request -> password)
+            ]);
+            return back() -> with('success', 'Patient Password Change Success');
+    
+        }
+        
 
 
 
