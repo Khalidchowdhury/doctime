@@ -124,7 +124,9 @@ class PatientRegisterController extends Controller
             $data -> update([
                 'password'  => Hash::make($request -> password)
             ]);
-            return back() -> with('success', 'Patient Password Change Success');
+
+            Auth::guard('patient') -> logout();
+            return redirect() -> route('login.page') -> with('success', 'Patient Password Change Success');
     
         }
         
